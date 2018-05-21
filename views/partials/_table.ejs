@@ -13,10 +13,26 @@
           <% const table = record.constructor.tableName %>
           <tr>
             <% props.forEach(prop => { %>
-              <td><%= record[prop] %></td>
+              <td>
+              <% if (prop === 'teachers') { %>
+                <% if (record[prop].length > 0) { %>
+                  <ol>
+                    <% record[prop].forEach(teacher => { %>
+                      <li><%= teacher.getFullName() %></li>
+                    <% }) %>
+                  </ol>
+                <% } else { %>
+                  No teachers
+                <% } %>
+              <% } else { %>
+                <%= record[prop] %>
+              <% } %>
+              </td>
             <% }); %>
             <% if (table === 'students') { %>
               <td><a class="normal-link" href="/students/<%= record.id %>/addSubject">Add Subject</a></td>
+            <% } else if (table === 'subjects') { %>
+              <td><a class="normal-link" href="/subjects/<%= record.id %>/enrolledstudents">Enrolled Students</a></td>
             <% } %>
             <td>
               <a class="edit-button" href="/<%= table %>/edit/<%= record.id %>">Edit</a>

@@ -13,5 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'subjectId'
     });
   };
+
+  Student.prototype.getFullName = function() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
   return Student;
 };

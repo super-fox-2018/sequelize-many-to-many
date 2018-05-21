@@ -1,18 +1,22 @@
 const { Subject } = require('./../models');
+const { Teacher } = require('./../models');
+const { Student } = require('./../models');
+const { StudentSubject } = require('./../models');
 
 exports.getSubjects = (req, res) => {
-  return Subject.findAll({
-    order: [['id', 'ASC']],
-    raw : true
+  Subject.findAll({
+    include: [{
+      model: Teacher,
+      as : 'teachers'
+    }]
   })
     .then(subjects => {
-      res.render('index', { 
-        title: 'Subjects',
-        tableName: 'subjects', 
+      res.render('subjects/index', { 
+        title: 'Subjects Data',
         records: subjects,
-        h: helpers,
       })
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 exports.addSubject = (req, res) => {
@@ -40,7 +44,6 @@ exports.editSubject = (req, res) => {
       tableName: 'subjects',
       columns: ['subject_name'],
       record: subject,
-      h : helpers,
     }));
 }
 
@@ -55,4 +58,43 @@ exports.deleteSubject = (req, res) => {
   const { subjectId } = req.params;
   return Subject.destroy({ where : { id : subjectId }})
     .then(result => res.redirect('/subjects'));
+}
+
+exports.getEnrolledStudents = (req, res) => {
+  const { subjectId } = req.params;
+  StudentSubject.findAll({
+    attributes: ['id', 'score'],
+    include: ['students', 'subjects'],
+    where : { subjectId }
+  })
+  .then(enrolledStudents => {
+    res.render('subjects/enrolled-students', {
+      title: enrolledStudents[0].subjects.subjectName,
+      enrolledStudents,
+    });
+  });
+};
+
+exports.giveScore = (req, res) => {
+  const { studentSubjectId } = req.params;
+  StudentSubject.findOne({
+    attributes: ['id', 'score'],
+    include: ['students', 'subjects'],
+    where : { id : studentSubjectId }
+  })
+  .then(enrolledStudent => {
+    res.render('subjects/give-score', {
+      title: 'Give Score',
+      enrolledStudent
+    })
+  });
+}
+
+exports.setScore = (req, res) => {
+  const { studentSubjectId } = req.params;
+  const { score } = req.body;
+  StudentSubject.update({ score: +score }, { where : { id : studentSubjectId }})
+    .then(result => {
+      res.redirect('/subjects');
+    });
 }

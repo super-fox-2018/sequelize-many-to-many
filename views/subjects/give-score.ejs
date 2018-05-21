@@ -1,0 +1,26 @@
+<%- include('../partials/_header') %>
+
+<a class="main-link" href="/subjects/<%= enrolledStudent.subjects.id%>/enrolledstudents">Return to subject</a>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td><%= enrolledStudent.students.getFullName() %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= enrolledStudent.students.email %></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<form class="form" action="/subjects/<%= enrolledStudent.id %>/givescore?_method=PATCH" method="POST">
+  <label class="form-label" for="score">Give score</label> 
+  <input class="form-input" type="text" name="score" value="<%= enrolledStudent.score || 0 %>"/>
+  <button class="form-submit"><%= title %></button>
+</form>
+
+
+<%- include('../partials/_footer') %>

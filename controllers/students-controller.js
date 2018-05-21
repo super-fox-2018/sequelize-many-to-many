@@ -53,7 +53,7 @@ exports.addSubjectToStudent = (req, res) => {
     .then(student => {
       Subject.findAll()
         .then(subjects => {
-          res.render('students/addSubject', { 
+          res.render('students/add-subject', { 
             title : 'Add Subject to Student',
             student,
             subjects

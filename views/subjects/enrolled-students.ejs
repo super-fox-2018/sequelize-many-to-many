@@ -1,0 +1,31 @@
+<%- include('../partials/_header') %>
+
+<a class="main-link" href="/subjects">Return to subject list</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% enrolledStudents.forEach(enrolledStudent => { %>
+      <% const student = enrolledStudent.students %>
+      <tr>
+        <td><%= student.getFullName() %></td>
+        <td>
+          <% if (enrolledStudent.score !== null) { %>
+            <%= enrolledStudent.score %>
+          <% } else { %>
+            <a class="normal-link" href="/subjects/<%= enrolledStudent.id %>/givescore">
+              Give Score
+            </a>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/_footer') %>
