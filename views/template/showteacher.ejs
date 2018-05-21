@@ -1,0 +1,20 @@
+<tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+    </tr>
+    <% for(let i in data){ %>
+    <tr>
+        <td><%= data[i].first_name %></td>
+        <td><%= data[i].last_name %></td>
+        <td><%= data[i].email %></td>
+        <% if(data[i].SubjectId !== null){ %>
+            <td><%= data[i].Subject.subject_name %></td> 
+        <%}else{%> 
+            <td>unassigned</td> 
+        <%}%>
+        
+        <td><button onclick="window.location.href='http://localhost:3000/<%= status%>/edit/<%= data[i].id%>'">edit</button ><button onclick="window.location.href='http://localhost:3000/<%= status%>/delete/<%= data[i].id%>'">delete</button></td>
+    </tr>
+    <% } %>

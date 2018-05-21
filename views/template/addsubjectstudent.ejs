@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+    </tr>
+    <tr>
+        <td><%= data.first_name %></td>
+        <td><%= data.last_name %></td>
+        <td><%= data.email %></td>
+    </tr>
+</table>
+
+<label for="">choose a subject</label>
+<select name="subject">
+    <% for(let i = 0; i < subjects.length; i++){%>
+        <% if(subjects[i].subject_name === data.subject){%>
+            <option value="<%=subjects[i].id%>" selected><%=subjects[i].subject_name%></option>
+        <%}else{%>
+        <option value="<%=subjects[i].id%>"><%=subjects[i].subject_name%></option>
+        <%}%>
+    <%}%>
+</select>

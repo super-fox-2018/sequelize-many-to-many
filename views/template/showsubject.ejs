@@ -1,0 +1,12 @@
+<tr>
+    <th>id</th>
+    <th>Name</th>
+</tr>
+<% for(let i in data){ %>
+<tr>
+    <td><%= data[i].id %></td>
+    <td><%= data[i].subject_name %></td>
+    
+    <td><button onclick="window.location.href='http://localhost:3000/<%= status%>/edit/<%= data[i].id%>'">edit</button><button onclick="window.location.href='http://localhost:3000/<%= status%>/delete/<%= data[i].id%>'">delete</button></td>
+</tr>
+<% } %>
