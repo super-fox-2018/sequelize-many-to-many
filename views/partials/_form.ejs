@@ -1,0 +1,15 @@
+<form class="form" action="<%= action %>" method="POST">
+
+    <p><%= message %></p>
+  
+    <% columns.forEach(column => { %>
+      <% let type = 'text'; %>
+      <% if (column === 'email') { %>
+        <% type = 'email' %>
+      <% } %>
+      <label class="form-label" for="<%= column %>"><%= h.beautifyString(column) %></label> 
+      <input class="form-input" type='<%= type %>' name="<%= column %>" value="<%= record ? record[column] : '' %>" required />
+    <% }); %>
+   
+    <button class="form-submit"><%= title %></button>
+  </form>

@@ -1,0 +1,34 @@
+<%- include('../partials/_header') %>
+
+<a class="main-link" href="/students">Show all data</a>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <td>First Name</td>
+      <td><%= student.firstName %></td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td><%= student.lastName %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= student.email %></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<form class="form" action="/students/<%= student.id %>/addSubject?_method=PATCH" method="POST">
+  <label class="form-label" for="subjectId">Choose Subject</label> 
+  <select name="subjectId" class="form-input">
+    <% subjects.forEach(subject => { %>
+      <option value="<%= subject.id %>"><%= subject.subjectName %></option>
+    <% }) %>
+  </select>
+
+  <button class="form-submit"><%= title %></button>
+</form>
+
+<%- include('../partials/_footer') %>
