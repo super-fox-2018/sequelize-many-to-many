@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>All Subjects Data</h1>
+	<h3><%= dataSubject.subject_name %></h3>	
+	<table border="2px">	
+		<tr>
+			<th>Name</th>
+			<th>Score</th>
+	 	</tr>
+	 	<%for(var i=0;i<dataSubject.Students.length;i++) {%>
+	 	<tr>
+	 		<td><%= `${dataSubject.Students[i].first_name} ${dataSubject.Students[i].last_name}` %></td>
+
+	 		<%if(dataSubject.Students[i].Student_Subject.score !== null) {%>
+	 			<td><%= dataSubject.Students[i].Student_Subject.score%></td>
+	 		<%}else{%>
+	 			<td><a href="/subjects/<%=dataSubject.id%>/giveScore/<%=dataSubject.Students[i].id %>"> Give Score</a></td>
+	 		<%}%>
+	 	</tr>
+	 	<%}%>	  
+	</table>
+	
+</body>
+
+</html>
