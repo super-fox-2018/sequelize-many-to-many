@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>All Subjects Data</h1>
+	<table border="2px">
+	  <tr>
+	  	<th>Subject Name</th>
+	    <th>Teacher</th>
+	    <th>Actions</th>
+	  </tr>
+	  <%for(var i=0;i<dataSubjects.length;i++) {%>
+	  <tr>
+	  	<td><%=dataSubjects[i].subject_name%></td>
+	    <td>
+	    	<%for(var j=0;j<dataSubjects[i].Teachers.length;j++) {%>
+	    	<%= `${dataSubjects[i].Teachers[j].first_name} ${dataSubjects[i].Teachers[j].last_name}` %> <br>
+	    	<%}%>	
+	    </td>
+	    
+	    <td> <a href='/subjects/<%=dataSubjects[i].id%>/enrolledStudents'>Enrolled Students</a></td>	
+	  </tr>
+	  <%}%>
+	</table>
+	
+</body>
+
+</html>
