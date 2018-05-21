@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Give Score</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<h1><%= subject.subjectName %></h1>
+	<h3>Fill the score</h3>
+	<form action="/subject/<%= subject.id %>/give-score/<%= student.id %>" method="post" accept-charset="utf-8">
+		Score: <input type="integer" name="score"><br><br>
+		<button type="submit" onclick="alert('Succesfully added')" value="submit">Submit</button>
+	</form>
+</body>
+</html>

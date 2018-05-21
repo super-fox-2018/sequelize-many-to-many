@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Enrolled Students List</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<h1><%= subject.subjectName %></h1>
+	<table border=1>
+		<caption>Students Enrolled</caption>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Score</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%subject.Students.forEach(student => {%>
+			<tr>
+				<td><%= student.firstName %> <%= student.lastName %></td>
+				<td><%= student.StudentSubject.studentScore %></td>
+				<td><a href="/subject/<%= subject.id %>/give-score/<%= student.id %>">Give Score</a></td>
+			</tr>
+			<%})%>
+		</tbody>
+	</table>
+	<h3><a href="/subject">Back</a></h3>
+</body>
+</html>
