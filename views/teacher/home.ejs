@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Teacher Page</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<h1>Teacher Page</h1>
+	<h3>Contact teacher via email for more information</h3>
+	<%if (msg !== '') {%>
+		<h4 style="color:red"> <%= msg %></h4>
+	<% } %>
+	<table border=1>
+		<caption> Teachers Information</caption>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Subject</th>
+				<th>Options</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% teachers.forEach((teacher) => { %>
+					<tr>
+						<td><%=teacher.id%></td>
+						<td><%=teacher.firstName%></td>
+						<td><%=teacher.lastName%></td>
+						<td><%=teacher.email%></td>
+						<%if (teacher.Subject !== null) {%>
+							<td><%=teacher.Subject.subjectName%></td>
+						<%} else {%>
+							<td><%=teacher.subject%></td>
+						<%}%>
+						<td><a href="/teacher/edit/<%= teacher.id %>">Edit | </a><a href="/teacher/delete/<%= teacher.id%>" onclick="confirm('Are you sure?')">Delete</a></td>
+					</tr>
+			<% }) %>
+		</tbody>
+	</table>
+	<h3><a href="/teacher/add">Register New Teacher</a></h3>
+	<h3><a href="/">Back</a></h3>
+</body>
+</html>

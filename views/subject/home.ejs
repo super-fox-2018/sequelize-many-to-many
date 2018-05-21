@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Subject Page</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<h1>Subject Page</h1>
+	<table border=1>
+		<caption>Our Subjects Information</caption>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Subject Name</th>
+				<th>Teachers</th>
+				<th>Options</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% subjects.forEach((subject) => { %>
+				<% subject.Teachers.forEach((teacher) => { %>
+					<tr>
+						<td><%=subject.id%></td>
+						<td><%=subject.subjectName%></td>
+						<td><%=teacher.firstName%> <%=teacher.lastName%></td>
+						<td><a href="/subject/<%= subject.id %>/students">Enrolled Students</a></td>
+						<td><a href="/subject/edit/<%= subject.id %>">Edit | </a><a href="/subject/delete/<%= subject.id%>" onclick="confirm('Are you sure?')">Delete</a></td>
+					</tr>
+				<% }) %>
+			<% }) %>
+		</tbody>
+	</table>
+	<h3><a href="/subject/add">Add new subject</a></h3>
+	<h3><a href="/">Back</a></h3>
+</body>
+</html>

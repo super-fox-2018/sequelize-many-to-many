@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Teacher Edit</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<h3>Edit teacher information below</h3>
+	<form action="/teacher/edit/<%= teacher.id %>" id = "teacher-form" method="post">
+			First Name: <input type="text" name="firstName" value="<%=teacher.firstName%>"><br><br>
+			Last Name: <input type="text" name="lastName" value="<%=teacher.lastName%>"><br><br>
+			Email: <input type="text" name="email"><br><br>
+			Subject ID:
+			<select name="subjectId" form="teacher-form">
+			  <option value="1">Chemistry</option>
+			  <option value="4">Economy</option>
+			</select><br><br>
+			<button type="submit" onclick="alert('Succesfully updated')" value="submit">Submit</button>
+		</form>
+</body>
+</html>
