@@ -5,7 +5,7 @@ const subjectRouter = require('./subject.js')
 const studentRouter = require('./student.js')
 
 router.get('/',(req,res)=>{
-    res.send('tesbwtNanti')
+    res.render('homepage')
 })
 router.use('/teacher',teacherRouter)
 router.use('/subject',subjectRouter)

@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Model = require('../models');
-const {Teacher,Subject} = Model
+const {Teacher,Subject,Student,StudentsSubject} = Model
 
 router.use((req,res,next)=>{
     res.locals.status = 'subject'
+    Teacher.findAll()
+    .then(Allteachers=>{ 
+        res.locals.teachers = Allteachers
+    })
     next()
 })
 
@@ -16,50 +20,10 @@ router.get('/',(req,res)=>{
         })
     })
 })
-router.get('/add',(req,res)=>{
-    res.render('formData',{
-        action:'add',
-        data:{
-        subject_name:''
-        }
+router.get('/:id/givescore',(req,res)=>{
+    StudentsSubject.findAll({include:[Subject,Student],where:{SubjectId:req.params.id}})
+    .then(studentsEnrolled=>{
+        res.render('enrolledStudent',{data:studentsEnrolled})
     })
 })
-
-router.post('/add',(req,res)=>{
-    Subject.create({
-        subject_name:req.body.subject_name,
-    }).then(
-        res.redirect('/subject')
-    )
-})
-router.get('/edit/:id',(req,res)=>{
-    Subject.find({where:{id:req.params.id}})
-    .then(subjectData =>{
-        res.render('formData',{
-            action:'edit/'+req.params.id,
-            data:{
-                subject_name:subjectData.subject_name,
-            }
-        })
-    })
-    .catch(error=>{
-        res.send(error)
-    })
-})
-router.post('/edit/:id',(req,res)=>{
-    Subject.findById(req.params.id)
-    .then(foundsubject=>{
-        foundsubject.subject_name = req.body.subject_name
-        foundsubject.save()
-    }).then(()=>{
-        res.redirect('/subject')
-    })
-})
-router.get('/delete/:id',(req,res)=>{
-    Subject.destroy({where:{id:req.params.id}})
-    .then(()=>{
-        res.redirect('/subject')
-    })
-})
-
 module.exports = router
