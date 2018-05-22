@@ -17,19 +17,21 @@ exports.getSubjects = (req, res) => {
         records: subjects,
       })
     })
-    .catch(err => console.log(err));
+    .catch(err => res.send(err));
 }
 
 exports.addSubject = (req, res) => {
   res.render('subjects/add', { 
     title: 'Add Subject',
-  });
+  })
+  .catch(err => res.send(err));
 }
 
 exports.createSubject = (req, res) => {
   const newSubject = req.body;
   return Subject.create(newSubject)
-    .then(result => res.redirect('/subjects'));
+    .then(result => res.redirect('/subjects'))
+    .catch(err => res.send(err));
 }
 
 exports.editSubject = (req, res) => {
@@ -38,20 +40,23 @@ exports.editSubject = (req, res) => {
     .then(subject => res.render('subjects/edit', { 
       title: 'Edit Subject', 
       record: subject,
-    }));
+    }))
+    .catch(err => res.send(err));
 }
 
 exports.updateSubject= (req, res) => {
   const { subjectId } = req.params;
   const updatedSubject = req.body;
   return Subject.update(updatedSubject, { where : { id : subjectId }})
-    .then(result => res.redirect('/subjects'));
+    .then(result => res.redirect('/subjects'))
+    .catch(err => res.send(err));
 }
 
 exports.deleteSubject = (req, res) => {
   const { subjectId } = req.params;
   return Subject.destroy({ where : { id : subjectId }})
-    .then(result => res.redirect('/subjects'));
+    .then(result => res.redirect('/subjects'))
+    .catch(err => res.send(err));
 }
 
 exports.getEnrolledStudents = (req, res) => {
@@ -74,7 +79,8 @@ exports.getEnrolledStudents = (req, res) => {
   .then(result => res.render('subjects/enrolled-students', {
     title: result[0],
     enrolledStudents: result[1],
-  }));
+  }))
+  .catch(err => res.send(err));
 };
 
 exports.giveScore = (req, res) => {
@@ -89,7 +95,8 @@ exports.giveScore = (req, res) => {
       title: 'Give Score',
       enrolledStudent
     })
-  });
+  })
+  .catch(err => res.send(err));
 }
 
 exports.setScore = (req, res) => {
@@ -98,5 +105,6 @@ exports.setScore = (req, res) => {
   StudentSubject.update({ score: +score }, { where : { id : studentSubjectId }})
     .then(result => {
       res.redirect('/subjects');
-    });
+    })
+    .catch(err => res.send(err));
 }

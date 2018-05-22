@@ -8,10 +8,16 @@ module.exports = (sequelize, DataTypes) => {
   }, { 
     tableName: 'teachers',
     hooks: {
+      beforeBulkUpdate: (teacher, options) => {
+        const keys = Object.keys(teacher.attributes);
+        keys.slice(0,keys.length - 1).forEach(key => {
+          console.log(key)
+          teacher.attributes[key] = teacher.attributes[key].trim();
+        });
+      },
       beforeCreate: (teacher, options) => {
         const keys = Object.keys(teacher.dataValues);
         keys.slice(1,3).forEach(key => {
-          console.log(key);
           teacher[key] = teacher[key].trim();
         });
       }

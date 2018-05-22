@@ -11,7 +11,8 @@ exports.getTeachers = (req, res) => {
         title: 'Teachers',
         records : teachers,
       });
-    });
+    })
+    .catch(err => res.send(err));
 }
 
 exports.addTeacher = (req, res) => {
@@ -21,7 +22,8 @@ exports.addTeacher = (req, res) => {
         title: 'Add Teacher',
         subjects,
       });
-    });
+    })
+    .catch(err => res.send(err));
 }
 
 exports.createTeacher = (req, res) => {
@@ -53,7 +55,8 @@ exports.editTeacher = (req, res) => {
             record: teacher,
           })
         })
-  );
+  )
+  .catch(err => res.send(err));
 }
 
 exports.updateTeacher = (req, res) => {
@@ -82,5 +85,6 @@ exports.updateTeacher = (req, res) => {
 exports.deleteTeacher = (req, res) => {
   const { teacherId } = req.params;
   return Teacher.destroy({ where : { id : teacherId }})
-    .then(result => res.redirect('/teachers'));
+    .then(result => res.redirect('/teachers'))
+    .catch(err => res.send(err));
 }

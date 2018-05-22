@@ -10,19 +10,22 @@ exports.getStudents = (req, res) => {
         title: 'Students Data', 
         records: students, 
       });
-    });
+    })
+    .catch(err => res.send(err));
 }
 
 exports.addStudent = (req, res) => {
   res.render('students/add', { 
     title: 'Add Student',
-  });
+  })
+  .catch(err => res.send(err));
 }
 
 exports.createStudent = (req, res) => {
   const newStudent = req.body;
   return Student.create(newStudent)
-    .then(result => res.redirect('/students'));
+    .then(result => res.redirect('/students'))
+    .catch(err => res.send(err));
 }
 
 exports.editStudent = (req, res) => {
@@ -31,20 +34,23 @@ exports.editStudent = (req, res) => {
     .then(student => res.render('students/edit', { 
       title: 'Edit Student', 
       record: student,
-    }));
+    }))
+    .catch(err => res.send(err));
 }
 
 exports.updateStudent= (req, res) => {
   const { studentId } = req.params;
   const updatedStudent = req.body;
   return Student.update(updatedStudent, { where : { id : studentId }})
-    .then(result => res.redirect('/students'));
+    .then(result => res.redirect('/students'))
+    .catch(err => res.send(err));
 }
 
 exports.deleteStudent = (req, res) => {
   const { studentId } = req.params;
   return Student.destroy({ where : { id : studentId }})
-    .then(result => res.redirect('/students'));
+    .then(result => res.redirect('/students'))
+    .catch(err => res.send(err));
 }
 
 exports.addSubjectToStudent = (req, res) => {
@@ -59,7 +65,8 @@ exports.addSubjectToStudent = (req, res) => {
             subjects
           });
         });
-    });
+    })
+    .catch(err => res.send(err));
 }
 
 exports.createStudentSubject = (req, res) => {
@@ -73,5 +80,5 @@ exports.createStudentSubject = (req, res) => {
             .then(result => res.redirect('/students'));
         });
     })
-    .catch(err => console.log(err));
+    .catch(err => res.send(err));
 }
