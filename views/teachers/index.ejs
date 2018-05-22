@@ -1,0 +1,13 @@
+<%- include('../partials/_header') %>
+
+<a class="main-link" href="/teachers/add">Add teacher data</a>
+
+
+<%- include('../partials/_table.ejs', { 
+  columns: ['id','firstName', 'lastName', 'email', 'subject'],
+  props: ['id', 'firstName', 'lastName', 'email']
+})
+%>
+
+
+<%- include('../partials/_footer') %>

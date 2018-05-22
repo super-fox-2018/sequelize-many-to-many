@@ -2,30 +2,34 @@
 
 <a class="main-link" href="/subjects">Return to subject list</a>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% enrolledStudents.forEach(enrolledStudent => { %>
-      <% const student = enrolledStudent.students %>
+<% if (enrolledStudents.length > 0) { %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= student.getFullName() %></td>
-        <td>
-          <% if (enrolledStudent.score !== null) { %>
-            <%= enrolledStudent.score %>
-          <% } else { %>
-            <a class="normal-link" href="/subjects/<%= enrolledStudent.id %>/givescore">
-              Give Score
-            </a>
-          <% } %>
-        </td>
+        <th>Name</th>
+        <th>Score</th>
       </tr>
-    <% }) %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% enrolledStudents.forEach(enrolledStudent => { %>
+        <% const student = enrolledStudent.students %>
+        <tr>
+          <td><%= student.getFullName() %></td>
+          <td>
+            <% if (enrolledStudent.score !== null) { %>
+              <%= enrolledStudent.score %>
+            <% } else { %>
+              <a class="normal-link" href="/subjects/<%= enrolledStudent.id %>/givescore">
+                Give Score
+              </a>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>  
+<% } else { %>
+  <p class="message">No students enrolled</p>
+<% } %>
 
 <%- include('../partials/_footer') %>

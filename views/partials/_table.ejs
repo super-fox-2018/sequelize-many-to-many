@@ -33,6 +33,8 @@
               <td><a class="normal-link" href="/students/<%= record.id %>/addSubject">Add Subject</a></td>
             <% } else if (table === 'subjects') { %>
               <td><a class="normal-link" href="/subjects/<%= record.id %>/enrolledstudents">Enrolled Students</a></td>
+            <% } else { %>
+              <td><%= (record.Subject && record.Subject.subjectName) || 'unassigned' %></td>
             <% } %>
             <td>
               <a class="edit-button" href="/<%= table %>/edit/<%= record.id %>">Edit</a>
@@ -47,3 +49,5 @@
 <% } else { %>
   <p class="message">No teachers data, Please add a new one</p>
 <% } %>
+
+<a class="home-link" href="/"><< back</a>

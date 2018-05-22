@@ -5,6 +5,7 @@ const { StudentSubject } = require('./../models');
 
 exports.getSubjects = (req, res) => {
   Subject.findAll({
+    order: [['id', 'ASC']], 
     include: [{
       model: Teacher,
       as : 'teachers'
@@ -20,12 +21,8 @@ exports.getSubjects = (req, res) => {
 }
 
 exports.addSubject = (req, res) => {
-  res.render('form', { 
+  res.render('subjects/add', { 
     title: 'Add Subject',
-    mode: 'Add',
-    tableName: 'subjects',
-    columns: ['subject_name'],
-    h : helpers,
   });
 }
 
@@ -37,12 +34,9 @@ exports.createSubject = (req, res) => {
 
 exports.editSubject = (req, res) => {
   const { subjectId } = req.params;
-  return Subject.findById(subjectId, { raw : true })
-    .then(subject => res.render('form', { 
+  return Subject.findById(subjectId)
+    .then(subject => res.render('subjects/edit', { 
       title: 'Edit Subject', 
-      mode: 'Edit',
-      tableName: 'subjects',
-      columns: ['subject_name'],
       record: subject,
     }));
 }
@@ -63,16 +57,24 @@ exports.deleteSubject = (req, res) => {
 exports.getEnrolledStudents = (req, res) => {
   const { subjectId } = req.params;
   StudentSubject.findAll({
+    order: [['id', 'ASC']],
     attributes: ['id', 'score'],
     include: ['students', 'subjects'],
     where : { subjectId }
   })
   .then(enrolledStudents => {
-    res.render('subjects/enrolled-students', {
-      title: enrolledStudents[0].subjects.subjectName,
-      enrolledStudents,
-    });
-  });
+    if (enrolledStudents[0]) {
+      return [enrolledStudents[0].subjects.subjectName,
+              enrolledStudents];
+    } else {
+      return Subject.findById(subjectId)
+        .then(subject => [subject.subjectName, enrolledStudents])
+    }
+  })
+  .then(result => res.render('subjects/enrolled-students', {
+    title: result[0],
+    enrolledStudents: result[1],
+  }));
 };
 
 exports.giveScore = (req, res) => {
