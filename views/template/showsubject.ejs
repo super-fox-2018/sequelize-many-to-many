@@ -11,7 +11,7 @@
     <td>
         <% for(let j in teachers){ %>
             <% if(data[i].id === teachers[j].SubjectId){ %>
-                <p><%= teachers[j].first_name+ " " +teachers[j].last_name%></p>
+                <p><%= helper(teachers[j].first_name,teachers[j].last_name)%></p>
             <%}%>
         <%}%>
     </td>

@@ -8,8 +8,8 @@ router.use((req,res,next)=>{
     Teacher.findAll()
     .then(Allteachers=>{ 
         res.locals.teachers = Allteachers
+        next()
     })
-    next()
 })
 
 router.get('/',(req,res)=>{

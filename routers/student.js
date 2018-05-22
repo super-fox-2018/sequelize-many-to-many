@@ -8,8 +8,8 @@ router.use((req,res,next)=>{
     Subject.findAll()
     .then(AllSubjects=>{ 
         res.locals.subjects = AllSubjects
+        next()
     })
-    next()
 })
 
 router.get('/',(req,res)=>{
