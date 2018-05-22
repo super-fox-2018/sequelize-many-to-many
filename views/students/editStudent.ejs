@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center
+}
+h1, p{
+    text-align: center
+}
+</style>
+<title>Students</title>
+</head>
+<body>
+    <h1>Edit Students</h1>
+    <p><a href ="/studentsData">student data</a></p>
+    <div class="edit_student_table">
+        <form action="/edit/<%= editStudent.id%>" method="post">
+            First name:<br>
+            <input type="text" name="firstName" value="<%= editStudent.firstName%>">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastName" value="<%= editStudent.lastName%>">
+            <br>
+            Email:<br>
+            <input type="text" name="email" value="<%= editStudent.email%>">
+            <br><br>
+            <input type="submit" value="Edit Student">
+        </form>
+    </div>
+<p><a href ="/">home</a></p>
+</body>
+</html>

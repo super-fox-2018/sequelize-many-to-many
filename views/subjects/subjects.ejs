@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center
+}
+h1, p{
+    text-align: center
+}
+</style>
+<title>Subjects</title>
+</head>
+<body>
+  <h1>Subjects Data!</h1>
+  <p><a href ="/subject/add">add subject</a></p>
+  <div class="subject_table">
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Subject</th>
+          <th>Teacher</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% subjectData.forEach(subject => { %>
+          <tr>
+            <td><%= subject.id %></td>
+            <td><%= subject.subjectName %></td>
+            <% let arrTeachers = [] %>
+            <% for(let i=0; i < subject.Teachers.length; i++){ %>
+              <% for(let i=0; i < subject.Teachers.length; i++){ %>
+                <%arrTeachers.push(subject.Teachers[i].firstName)%>
+                <% if (arrTeachers.length === subject.Teachers.length) {%>
+                  <td><%= arrTeachers %></td>
+                <%}%>
+              <%}%>
+            <%}%>
+            <td><a href = "/subject/edit/<%=subject.id%>">edit</a> || <a href="/subject/delete/<%=subject.id%>" onclick = "return confirm('delete this subject?')"> delete</a> </td>
+          </tr>
+        <% })%>
+      </tbody>
+    </table>
+  </div>
+<p><a href ="/">home</a></p>
+</body>
+</html>
