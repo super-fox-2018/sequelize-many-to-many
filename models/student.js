@@ -8,6 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     hooks:{
       beforeCreate:(student,options)=>{
         student.first_name += ' sponsored by Aqua'
+      },
+      afterCreate:(student,options)=>{
+        let studentObj ={
+          last_name: student.last_name + 'HAHAHAAHA'
+        }
+        Student.update(studentObj,{where:{id:student.id}})
       }
     }
   });
