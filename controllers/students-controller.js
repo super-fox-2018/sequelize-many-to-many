@@ -73,4 +73,5 @@ exports.createStudentSubject = (req, res) => {
             .then(result => res.redirect('/students'));
         });
     })
+    .catch(err => console.log(err));
 }

@@ -2,7 +2,9 @@
 module.exports = (sequelize, DataTypes) => {
   var Subject = sequelize.define('Subject', {
     subjectName: DataTypes.STRING
-  }, { tableName: 'subjects' });
+  }, { 
+    tableName: 'subjects',
+  });
   Subject.associate = function(models) {
     Subject.belongsToMany(models.Student, {
       as: 'students',
