@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center
+}
+h1, p{
+    text-align: center
+}
+</style>
+<title>Subjects</title>
+</head>
+<body>
+    <h1>Edit Subject</h1>
+    <p><a href ="/subjects">subject data</a></p>
+    <div class="edit_subject_table">
+        <form action="/subject/edit/<%= editSubject.id%>" method="post">
+            Subject:<br>
+            <input type="text" name="subjectName" value="<%= editSubject.subjectName%>">
+            <br>
+            <br><br>
+            <input type="submit" value="Edit Subject">
+        </form>
+    </div>
+<p><a href ="/">home</a></p>
+</body>
+</html>

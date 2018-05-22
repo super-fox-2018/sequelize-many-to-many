@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center
+}
+h1, p{
+    text-align: center
+}
+</style>
+<title>Teachers</title>
+</head>
+<body>
+    <h1>Edit Teacher</h1>
+    <p><a href ="/teachers">show all teachers data</a></p>
+    <div class="edit_teacher_table">
+        <form action="/teacher/edit/<%= editTeacher.id%>" method="post">
+            First name:<br>
+            <input type="text" name="firstName" value="<%= editTeacher.firstName%>">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastName" value="<%= editTeacher.lastName%>">
+            <br>
+            Email:<br>
+            <input type="text" name="email" value="<%= editTeacher.email%>">
+            <br>
+            Subject Id:<br>
+            <input type="text" name="subjectId" value="<%= editTeacher.subjectId%>">
+            <br><br>
+            <input type="submit" value="Edit Teacher">
+        </form>
+    </div>
+    <p><a href ="/">home</a></p>
+</body>
+</html>

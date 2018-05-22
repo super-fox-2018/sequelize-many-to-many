@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center
+}
+h1, p{
+    text-align: center
+}
+</style>
+<title>Students</title>
+</head>
+<body>
+    <h1>Add Subject to Students</h1>
+    <div class="edit_student_table">
+        <form action="/students/:id/addSubject" method="post">
+            First name:<br>
+            <input type="text" name="firstName" value="<%= addSubject.firstName%>">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastName" value="<%= addSubject.lastName%>">
+            <br>
+            Email:<br>
+            <input type="text" name="email" value="<%= addSubject.email%>">
+            <br>
+            Choose Subject:<br>
+            <select>
+                <option name="subjectId" value="1">Kimia</option>
+                <option name="subjectId" value="2">Ekonomi</option>
+              </select>
+            <br><br>
+            <input type="submit" value="Add Subject">
+        </form>
+    </div>
+<p><a href ="/">home</a></p>
+</body>
+</html>
