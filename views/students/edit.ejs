@@ -1,0 +1,11 @@
+<%- include('../partials/_header') %>
+
+<a class="main-link" href="/students">Show all data</a>
+
+<%- include('../partials/_form', { 
+  columns: ['firstName', 'lastName', 'email'],
+  table: 'students',
+  action: `/students/edit/${record.id}?_method=PUT`
+}); %>
+
+<%- include('../partials/_footer') %>

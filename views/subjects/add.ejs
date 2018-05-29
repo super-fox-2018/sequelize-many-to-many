@@ -1,0 +1,11 @@
+<%- include('../partials/_header') %>
+
+<a class="main-link" href="/subjects">Show all data</a>
+
+<%- include('../partials/_form', { 
+  columns: ['subjectName'],
+  table: 'subjects',
+  action: '/subjects/add'
+}); %>
+
+<%- include('../partials/_footer') %>

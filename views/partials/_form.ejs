@@ -1,0 +1,26 @@
+<form class="form" action="<%= action %>" method="POST">
+
+    <p><%= message %></p>
+  
+    <% columns.forEach(column => { %>
+      <% let type = 'text'; %>
+      <% if (column === 'email') { %>
+        <% type = 'email' %>
+      <% } %>
+      <label class="form-label" for="<%= column %>"><%= h.beautifyString(column) %></label> 
+      <input class="form-input" type='<%= type %>' name="<%= column %>" value="<%= record ? record[column] : '' %>" required />
+    <% }); %>
+
+    <% if (table === 'teachers') { %>
+      <label class="form-label" for="subjectId">Subject</label> 
+      <select name="subjectId" class="form-input">
+          <option value="0" selected>Unassigned</option>
+          <% subjects.forEach(subject => { %>
+            <% const selected = record && record.subjectId === subject.id ? 'selected' : '' %>
+            <option value="<%= subject.id %>" <%= selected%>><%= subject.subjectName %></option>
+          <% }) %>
+      </select>
+    <% } %>
+   
+    <button class="form-submit"><%= title %></button>
+  </form>

@@ -1,0 +1,53 @@
+<% if (records.length > 0) {%>
+  <table class="table">
+      <thead>
+        <tr>
+          <% columns.forEach(column => { %>
+            <th><%= h.beautifyString(column)%></th>
+          <% }) %>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% records.forEach(record => { %>
+          <% const table = record.constructor.tableName %>
+          <tr>
+            <% props.forEach(prop => { %>
+              <td>
+              <% if (prop === 'teachers') { %>
+                <% if (record[prop].length > 0) { %>
+                  <ol>
+                    <% record[prop].forEach(teacher => { %>
+                      <li><%= teacher.getFullName() %></li>
+                    <% }) %>
+                  </ol>
+                <% } else { %>
+                  No teachers
+                <% } %>
+              <% } else { %>
+                <%= record[prop] %>
+              <% } %>
+              </td>
+            <% }); %>
+            <% if (table === 'students') { %>
+              <td><a class="normal-link" href="/students/<%= record.id %>/addSubject">Add Subject</a></td>
+            <% } else if (table === 'subjects') { %>
+              <td><a class="normal-link" href="/subjects/<%= record.id %>/enrolledstudents">Enrolled Students</a></td>
+            <% } else { %>
+              <td><%= (record.Subject && record.Subject.subjectName) || 'unassigned' %></td>
+            <% } %>
+            <td>
+              <a class="edit-button" href="/<%= table %>/edit/<%= record.id %>">Edit</a>
+              <form class="delete-form" action="/<%= table %>/delete/<%= record.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this data?')">
+                <input class="delete-button" type="submit" value="Delete">
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+<% } else { %>
+  <p class="message">No teachers data, Please add a new one</p>
+<% } %>
+
+<a class="home-link" href="/"><< back</a>
