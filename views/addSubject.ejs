@@ -1,0 +1,8 @@
+<%- include('template/header.ejs') %>
+<body>
+    <form action="/<%= status %>/addSubject/<%= data.id %>" method="post">
+        <%- include(`template/addsubject${status}`) %>
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>

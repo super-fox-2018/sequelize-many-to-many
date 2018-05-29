@@ -1,0 +1,8 @@
+<%- include('template/header.ejs') %>
+<body>
+    <a href="http://localhost:3000/<%=status%>/add">add New Data</a>
+    <table>
+        <%-include(`template/show${status}.ejs`)%>
+    </table>
+</body>
+</html>

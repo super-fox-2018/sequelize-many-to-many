@@ -1,0 +1,15 @@
+first name <input type='text' name='first_name' value ='<%= data.first_name %>'/>
+last name <input type='text' name='last_name' value ='<%= data.last_name %>'/>
+email <input type='text' name='email' value ='<%= data.email %>'/>
+<% if(action.includes('edit')){%> 
+    <select name="subject">
+        <option value='null'>unassigned</option>
+        <% for(let i = 0; i < subjects.length; i++){%>
+            <% if(subjects[i].subject_name === data.subject){%>
+                <option value="<%=subjects[i].id%>" selected><%=subjects[i].subject_name%></option>
+            <%}else{%>
+            <option value="<%=subjects[i].id%>"><%=subjects[i].subject_name%></option>
+            <%}%>
+        <%}%>
+    </select>
+<% } %>

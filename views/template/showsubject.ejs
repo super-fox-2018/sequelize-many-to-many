@@ -1,0 +1,20 @@
+<tr>
+    <th>id</th>
+    <th>Name</th>
+    <th>Teachers</th>
+    <th>Actions</th>
+</tr>
+<% for(let i in data){ %>
+<tr>
+    <td><%= data[i].id %></td>
+    <td><%= data[i].subject_name %></td>
+    <td>
+        <% for(let j in teachers){ %>
+            <% if(data[i].id === teachers[j].SubjectId){ %>
+                <p><%= helper(teachers[j].first_name,teachers[j].last_name)%></p>
+            <%}%>
+        <%}%>
+    </td>
+    <td><a href="/<%= status %>/<%= data[i].id %>/enrolledstudent">enrolled Students</a></td>
+</tr>
+<% } %>
